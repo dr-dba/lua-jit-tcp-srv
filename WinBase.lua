@@ -1,6 +1,6 @@
 -- WinBase.lua
 -- From WinBase.h
---[[
+-- [[
 local ffi = require "ffi" --]]
 
 require "jit-tcp-srv.WTypes"

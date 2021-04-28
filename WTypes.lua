@@ -1,4 +1,4 @@
---[[
+-- [[
 local ffi = require"ffi" --]]
 local bit = require"bit"
 
@@ -174,7 +174,7 @@ require "jit-tcp-srv.guiddef"
 
 
 _G.ffi.cdef[[
-/* @Xer0X
+// /* @Xer0X
 typedef union _LARGE_INTEGER {
 	struct {
 		DWORD LowPart;
@@ -197,7 +197,7 @@ typedef struct _FILETIME
     DWORD dwLowDateTime;
     DWORD dwHighDateTime;
 } 	FILETIME;
-*/
+// */
 typedef struct _FILETIME *PFILETIME;
 
 typedef struct _FILETIME *LPFILETIME;

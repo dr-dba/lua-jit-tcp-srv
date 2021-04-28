@@ -18,7 +18,7 @@
 -- ws2def.h
 -- winsock2.h
 
---[[
+-- [[
 local ffi = require "ffi" --]]
 local bit = require "bit"
 local lshift = bit.lshift

@@ -1,6 +1,6 @@
 --  ffi_def_win.lua
 module(..., package.seeall)
---[[
+-- [[
 local ffi = require "ffi" --]]
 require "jit-tcp-srv.win_socket"
 local bit = require "bit"
