@@ -2,4 +2,4 @@
 create "jit-tcp-srv" directory in modules directory to keep this files<br />
 run:<br />
 lua:LE(require("jit-tcp-srv.lib_util"))<br />
-<img src="Capture.jpg" />
+<img src="Capture.JPG" />
