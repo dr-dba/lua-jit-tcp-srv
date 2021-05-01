@@ -1,4 +1,8 @@
 # lua-jit-tcp-srv
+Вопчем, куча бесполезного и недооформленного LuaJiT FFi<br />
+Взято отсюда:<br />
+https://github.com/stuta/Luajit-Tcp-Server/<br />
+<br /><br />
 create "jit-tcp-srv" directory in modules directory to keep this files.<br /><br />
 Репозиторий не рабочий без разкомментирования:<br />
 --[[ local ffi = require "ffi" --]] <br />
