@@ -18,8 +18,7 @@
 -- ws2def.h
 -- winsock2.h
 
--- [[
-local ffi = require "ffi" --]]
+local ffi = require "ffi"
 local bit = require "bit"
 local lshift = bit.lshift
 local rshift = bit.rshift
@@ -28,7 +27,7 @@ local bor = bit.bor
 local bnot = bit.bnot
 local bswap = bit.bswap
 
-require "jit-tcp-srv.WinBase"
+require("jit-tcp-srv.WinBase")
 
 function MAKEWORD(low,high)
 	return bor(low , lshift(high , 8))
@@ -41,7 +40,6 @@ end
 function HIGHBYTE(word)
 	return band(rshift(word,8), 0xff)
 end
-
 
 ffi.cdef[[
 typedef uint8_t		u_char;
@@ -213,9 +211,6 @@ FIONREAD    = _IOR(string.byte'f', 127, "uint32_t") -- get # bytes to read
 FIONBIO     = _IOW(string.byte'f', 126, "uint32_t") -- set/clear non-blocking i/o
 FIOASYNC    = _IOW(string.byte'f', 125, "uint32_t") -- set/clear async i/o
 
-
-
-
 --[[
 	WinSock 2 extension -- manifest constants for WSAIoctl()
 	From ws2def.h
@@ -261,7 +256,6 @@ SIO_ADDRESS_LIST_QUERY        = _WSAIOR(IOC_WS2,22);
 SIO_ADDRESS_LIST_CHANGE       = _WSAIO(IOC_WS2,23);
 SIO_QUERY_TARGET_PNP_HANDLE   = _WSAIOR(IOC_WS2,24);
 
-
 --
 -- MSWSock.h
 --
@@ -291,8 +285,6 @@ typedef BOOL ( * LPFN_CONNECTEX) (
     DWORD dwSendDataLength,
     LPDWORD lpdwBytesSent,
     LPOVERLAPPED lpOverlapped);
-
-
 
 typedef BOOL ( * LPFN_DISCONNECTEX) (
     SOCKET s,
@@ -495,18 +487,17 @@ enum {
 	IP_MAX_MEMBERSHIPS        = 20,   /* per socket; must fit in one mbuf */
 };
 
-
-        // Options for connect and disconnect data and options.  Used only by
-        // non-TCP/IP transports such as DECNet, OSI TP4, etc.
+// Options for connect and disconnect data and options.  Used only by
+// non-TCP/IP transports such as DECNet, OSI TP4, etc.
 enum {
-            SO_CONNDATA     = 0x7000,
-            SO_CONNOPT      = 0x7001,
-            SO_DISCDATA     = 0x7002,
-            SO_DISCOPT      = 0x7003,
-            SO_CONNDATALEN  = 0x7004,
-            SO_CONNOPTLEN   = 0x7005,
-            SO_DISCDATALEN  = 0x7006,
-            SO_DISCOPTLEN   = 0x7007,
+	SO_CONNDATA     = 0x7000,
+	SO_CONNOPT      = 0x7001,
+	SO_DISCDATA     = 0x7002,
+	SO_DISCOPT      = 0x7003,
+	SO_CONNDATALEN  = 0x7004,
+	SO_CONNOPTLEN   = 0x7005,
+	SO_DISCDATALEN  = 0x7006,
+	SO_DISCOPTLEN   = 0x7007,
 };
 
         /*
@@ -534,19 +525,18 @@ enum {
 * WinSock 2 extension -- new options
 */
 enum {
-	SO_GROUP_ID       = 0x2001,      /* ID of a socket group */
-	SO_GROUP_PRIORITY = 0x2002,      /* the relative priority within a group*/
-	SO_MAX_MSG_SIZE   = 0x2003,      /* maximum message size */
-	SO_PROTOCOL_INFOA = 0x2004,      /* WSAPROTOCOL_INFOA structure */
-	SO_PROTOCOL_INFOW = 0x2005,      /* WSAPROTOCOL_INFOW structure */
+	SO_GROUP_ID       = 0x2001,	/* ID of a socket group */
+	SO_GROUP_PRIORITY = 0x2002,	/* the relative priority within a group*/
+	SO_MAX_MSG_SIZE   = 0x2003,	/* maximum message size */
+	SO_PROTOCOL_INFOA = 0x2004,	/* WSAPROTOCOL_INFOA structure */
+	SO_PROTOCOL_INFOW = 0x2005,	/* WSAPROTOCOL_INFOW structure */
 	SO_PROTOCOL_INFO  = SO_PROTOCOL_INFOW,
-	PVD_CONFIG        = 0x3001,       /* configuration info for service provider */
-	SO_CONDITIONAL_ACCEPT = 0x3002,   /* enable true conditional accept: */
-                                                   /*  connection is not ack-ed to the */
-                                       /*  other side until conditional */
-                                       /*  function returns CF_ACCEPT */
+	PVD_CONFIG        = 0x3001,	/* configuration info for service provider */
+	SO_CONDITIONAL_ACCEPT = 0x3002, /* enable true conditional accept: */
+					/*  connection is not ack-ed to the */
+					/*  other side until conditional */
+					/*  function returns CF_ACCEPT */
 };
-
 
 /*
 * Maximum queue length specifiable by listen.
@@ -556,12 +546,12 @@ enum {
 };
 
 enum {
-	MSG_OOB         =  0x0001,      /* process out-of-band data */
-	MSG_PEEK        =  0x0002,      /* peek at incoming message */
-	MSG_DONTROUTE   =  0x0004,      /* send without using routing tables */
-	MSG_WAITALL     =  0x0008,      /* do not complete until packet is completely filled */
-	MSG_PARTIAL     =  0x8000,      /* partial send or recv for message xport */
-	MSG_INTERRUPT   =  0x10,           /* send/recv in the interrupt context */
+	MSG_OOB         =  0x0001, /* process out-of-band data */
+	MSG_PEEK        =  0x0002, /* peek at incoming message */
+	MSG_DONTROUTE   =  0x0004, /* send without using routing tables */
+	MSG_WAITALL     =  0x0008, /* do not complete until packet is completely filled */
+	MSG_PARTIAL     =  0x8000, /* partial send or recv for message xport */
+	MSG_INTERRUPT   =  0x10,   /* send/recv in the interrupt context */
 	MSG_MAXIOVLEN   =  16,
 };
 
@@ -569,12 +559,12 @@ enum {
 * Define constant based on rfc883, used by gethostbyxxxx() calls.
 */
 enum {
-	MAXGETHOSTSTRUCT  = 1024,
+	MAXGETHOSTSTRUCT	= 1024,
 };
 
 enum {
-	WSADESCRIPTION_LEN =     256,
-	WSASYS_STATUS_LEN  =     128,
+	WSADESCRIPTION_LEN	= 256,
+	WSASYS_STATUS_LEN 	= 128,
 };
 ]]
 
@@ -588,26 +578,25 @@ enum {
  s_lh    S_un.S_un_b.s_b3    // logical host
 --]]
 
-ffi.cdef[[
+ffi.cdef([[
 typedef struct in_addr {
 	union {
 		struct {
 			uint8_t s_b1,s_b2,s_b3,s_b4;
-			} S_un_b;
+		} S_un_b;
 		struct {
 			uint16_t s_w1,s_w2;
 		} S_un_w;
 		uint32_t S_addr;
 	};
 } IN_ADDR, *PIN_ADDR, *LPIN_ADDR;
-]]
+]])
 
-ffi.cdef[[
+ffi.cdef([[
 typedef struct sockaddr {
 	ADDRESS_FAMILY	sa_family;
 	uint8_t		sa_data[14];
 } SOCKADDR, *PSOCKADDR, *LPSOCKADDR;
-
 
 typedef struct sockaddr_in {
     int16_t		sin_family;
@@ -615,14 +604,11 @@ typedef struct sockaddr_in {
     IN_ADDR 	sin_addr;
     uint8_t 	sin_zero[8];
 } SOCKADDR_IN, *PSOCKADDR_IN;
-]]
+]])
 
 sockaddr = ffi.typeof("struct sockaddr");
 
-
-
-
-ffi.cdef[[
+ffi.cdef([[
 //
 // IPv6 Internet address (RFC 2553)
 // This is an 'on-wire' format structure.
@@ -660,8 +646,6 @@ enum {
 	_SS_PAD1SIZE = _SS_ALIGNSIZE - 2,
 	_SS_PAD2SIZE = _SS_MAXSIZE - (2 + _SS_PAD1SIZE + _SS_ALIGNSIZE)
 };
-
-
 /*
 struct sockaddr_storage {
 	sa_family_t ss_family;
@@ -678,17 +662,14 @@ typedef struct sockaddr_storage {
 __attribute__ ((aligned (8)));
 */
 
-
 typedef struct sockaddr_storage {
 	ADDRESS_FAMILY ss_family;
 	uint8_t pad[_SS_MAXSIZE-2];
-}SOCKADDR_STORAGE;
+} SOCKADDR_STORAGE;
 // __attribute__ ((aligned (8)))
 typedef struct sockaddr_storage *PSOCKADDR_STORAGE;
 
-
-
-]]
+]])
 
 
 ffi.cdef[[
@@ -791,20 +772,16 @@ typedef struct _QualityOfService {
 	WSABUF ProviderSpecific;
 } QOS,  *LPQOS;
 
-
 static const int MAX_PROTOCOL_CHAIN = 7;
 static const int WSAPROTOCOL_LEN  = 255;
 static const int BASE_PROTOCOL      = 1;
 static const int LAYERED_PROTOCOL   = 0;
-
-
 
 typedef struct _WSAPROTOCOLCHAIN {
 	int ChainLen;
 	DWORD ChainEntries[MAX_PROTOCOL_CHAIN];
 } WSAPROTOCOLCHAIN,  *LPWSAPROTOCOLCHAIN;
 ]]
-
 
 ffi.cdef[[
 typedef struct _WSAPROTOCOL_INFO {
@@ -892,11 +869,9 @@ typedef void (* LPWSAOVERLAPPED_COMPLETION_ROUTINE)(
     );
 ]]
 
-
-
-
 -- Berkeley Sockets calls
-ffi.cdef[[
+
+ffi.cdef([[
 u_long	htonl(u_long hostlong);
 u_short htons(u_short hostshort);
 u_short ntohs(u_short netshort);
@@ -942,8 +917,6 @@ int setsockopt(SOCKET s, int level, int optname, const char* optval, int optlen)
 
 int shutdown(SOCKET s, int how);
 
-
-
 int gethostname(char* name, int namelen);
 
 struct hostent* gethostbyaddr(const char* addr,int len,int type);
@@ -952,13 +925,7 @@ struct hostent* gethostbyname(const char* name);
 int GetNameInfoA(const struct sockaddr * sa, DWORD salen, char * host, DWORD hostlen, char * serv,DWORD servlen,int flags);
 int getaddrinfo(const char* nodename,const char* servname,const struct addrinfo* hints,PADDRINFOA * res);
 void freeaddrinfo(PADDRINFOA pAddrInfo);
-]]
-
-
-
-
-
-
+]])
 
 --[[
 function FD_CLR(fd, set)
@@ -995,10 +962,8 @@ do {
 } while(0)
 end
 --]]
-
 function FD_ZERO(set)
 	set.fd_count = 0
-
 	return true
 end
 --[[
@@ -1006,27 +971,21 @@ function FD_ISSET(fd, set)
 	return __WSAFDIsSet((SOCKET)(fd), (fd_set FAR *)(set))
 end
 --]]
-
 local wsadata_typename
 
 if ffi.abi("64bit") then
 	wsadata_typename = "WSADATA64"
-
 	ffi.cdef[[
 		int WSAStartup(WORD wVersionRequested, LPWSADATA64 lpWSAData);
 	]]
 else
 	wsadata_typename = "WSADATA"
-
 	ffi.cdef[[
 		int WSAStartup(WORD wVersionRequested, LPWSADATA lpWSAData);
 	]]
 end
 
-
-
-
-ffi.cdef[[
+ffi.cdef([[
 typedef struct pollfd {
     SOCKET		fd;
     int16_t		events;
@@ -1034,7 +993,8 @@ typedef struct pollfd {
 } WSAPOLLFD, *PWSAPOLLFD, *LPWSAPOLLFD;
 
 int WSAPoll(LPWSAPOLLFD fdArray, ULONG fds, INT timeout);
-]]
+]])
+
 WSAPOLLFD = ffi.typeof("WSAPOLLFD")
 WSAPOLLFD_mt = {
 	__gc = function(self)
@@ -1049,38 +1009,37 @@ SOCKET WSASocketA(int af, int type, int protocol, LPWSAPROTOCOL_INFOA lpProtocol
 
 BOOL AcceptEx (SOCKET sListenSocket, SOCKET sAcceptSocket,
 	PVOID lpOutputBuffer,
-    DWORD dwReceiveDataLength,
-    DWORD dwLocalAddressLength,
-    DWORD dwRemoteAddressLength,
-    LPDWORD lpdwBytesReceived,
-    LPOVERLAPPED lpOverlapped);
+	DWORD dwReceiveDataLength,
+	DWORD dwLocalAddressLength,
+	DWORD dwRemoteAddressLength,
+	LPDWORD lpdwBytesReceived,
+	LPOVERLAPPED lpOverlapped);
 
 int WSAGetLastError();
 
 INT WSARecvEx(SOCKET s, CHAR *buf, INT len, INT *flags);
 
-
-
 int WSASend(SOCKET s, LPWSABUF lpBuffers, DWORD dwBufferCount,
-    LPDWORD lpNumberOfBytesSent, DWORD dwFlags,
-    LPWSAOVERLAPPED lpOverlapped,
+	LPDWORD lpNumberOfBytesSent, 
+	DWORD dwFlags,
+	LPWSAOVERLAPPED lpOverlapped,
 	LPWSAOVERLAPPED_COMPLETION_ROUTINE lpCompletionRoutine);
 
-
-int  WSASendMsg(SOCKET Handle, LPWSAMSG lpMsg, DWORD dwFlags,
-    LPDWORD lpNumberOfBytesSent, LPWSAOVERLAPPED lpOverlapped,
+int WSASendMsg(SOCKET Handle, LPWSAMSG lpMsg, DWORD dwFlags,
+	LPDWORD lpNumberOfBytesSent, 
+	LPWSAOVERLAPPED lpOverlapped,
 	LPWSAOVERLAPPED_COMPLETION_ROUTINE lpCompletionRoutine);
 
 int WSASendDisconnect(SOCKET s, LPWSABUF lpOutboundDisconnectData);
 
 int WSASendTo(SOCKET s,
-    LPWSABUF lpBuffers,
-    DWORD dwBufferCount,
-    LPDWORD lpNumberOfBytesSent,
-    DWORD dwFlags,
-    const struct sockaddr * lpTo,
-    int iTolen,
-    LPWSAOVERLAPPED lpOverlapped,
+	LPWSABUF lpBuffers,
+	DWORD dwBufferCount,
+	LPDWORD lpNumberOfBytesSent,
+	DWORD dwFlags,
+	const struct sockaddr * lpTo,
+	int iTolen,
+	LPWSAOVERLAPPED lpOverlapped,
 	LPWSAOVERLAPPED_COMPLETION_ROUTINE lpCompletionRoutine);
 
 BOOL WSASetEvent(WSAEVENT hEvent);
@@ -1088,11 +1047,10 @@ BOOL WSASetEvent(WSAEVENT hEvent);
 INT WSAAddressToStringA(LPSOCKADDR lpsaAddress,
 	DWORD dwAddressLength,
 	LPWSAPROTOCOL_INFOA lpProtocolInfo,
-    LPSTR lpszAddressString,
+	LPSTR lpszAddressString,
 	LPDWORD lpdwAddressStringLength);
 
 ]]
-
 
 -- General networking interfaces
 ffi.cdef[[
@@ -1125,8 +1083,6 @@ typedef struct _INTERFACE_INFO {
 } INTERFACE_INFO, *LPINTERFACE_INFO;
 ]]
 
-
-
 ffi.cdef[[
 int WSAIoctl(
     SOCKET s,
@@ -1145,8 +1101,6 @@ int WSAEnumProtocolsA(
     LPWSAPROTOCOL_INFOA lpProtocolBuffer,
     LPDWORD lpdwBufferLength);
 ]]
-
-
 
 return {
 	wsadata_typename = wsadata_typename,

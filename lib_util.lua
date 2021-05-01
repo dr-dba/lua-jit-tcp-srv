@@ -1,7 +1,8 @@
---  lib_util.lua
+-- lib_util.lua
+
 module(..., package.seeall)
--- [[
-local ffi = require "ffi" --]]
+
+local ffi = require "ffi"
 local C = ffi.C
 local bit = require "bit"
 
@@ -14,11 +15,11 @@ is32bit = ffi.abi("32bit")
 
 local floor = math.floor
 
-if isWin then
-	require "jit-tcp-srv.ffi_def_windows_old"  -- ffi_def_windows --ffi_def_windows_by_hand --  ffi_def_windows_old
-elseif isMac then
-	require "jit-tcp-srv.ffi_def_unix"	-- ffi_def_osx -- ffi_def_unix
-else -- Linux
+if	isWin 
+then    require "jit-tcp-srv.ffi_def_windows_old"  -- ffi_def_windows --ffi_def_windows_by_hand --  ffi_def_windows_old
+elseif	isMac 
+then	require "jit-tcp-srv.ffi_def_unix"	-- ffi_def_osx -- ffi_def_unix
+else	-- Linux
 	require "jit-tcp-srv.ffi_def_linux"	-- ffi_def_linux -- ffi_def_unix
 end
 

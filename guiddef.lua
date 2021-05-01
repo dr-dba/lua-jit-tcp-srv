@@ -1,21 +1,20 @@
 --
 -- From guiddef.h
 --
--- [[ 
-local ffi = require "ffi" --]]
+
+local ffi = require "ffi"
 local C = ffi.C
 
-
-ffi.cdef[[
+ffi.cdef([[
 typedef struct {
     unsigned long 	Data1;
     unsigned short	Data2;
     unsigned short	Data3;
     unsigned char	Data4[8];
 } GUID, UUID, *LPGUID;
-]]
+]])
 
-ffi.cdef[[
+ffi.cdef([[
 typedef const GUID *	LPCGUID;
 typedef const GUID *	REFGUID;
 
@@ -26,8 +25,7 @@ typedef const IID *		REFIID;
 typedef GUID 			CLSID;
 typedef CLSID *			LPCLSID;
 typedef const GUID *	REFCLSID;
-]]
-
+]])
 
 local function bytecompare(a, b, n)
 	local res = true
@@ -102,9 +100,6 @@ end
 function IsEqualFMTID(rfmtid1, rfmtid2)
 	return rfmtid1 == rfmtid2
 end
-
-
-
 
 -- From Rpcrt4.h
 

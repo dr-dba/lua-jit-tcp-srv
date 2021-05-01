@@ -1,8 +1,10 @@
---  ffi_def_win.lua
+-- ffi_def_win.lua
+-- lua:LE(require("jit-tcp-srv.ffi_def_windows_old"), "!")
+
 module(..., package.seeall)
--- [[
-local ffi = require "ffi" --]]
-require "jit-tcp-srv.win_socket"
+
+local ffi = require "ffi"
+require("jit-tcp-srv.win_socket")
 local bit = require "bit"
 local bor = bit.bor
 local lshift = bit.lshift
@@ -192,7 +194,7 @@ ffi.cdef[[
 
 --  thread.lua
 ffi.cdef[[
-		static const int INFINITE = 0xFFFFFFFF;
+	static const int INFINITE = 0xFFFFFFFF;
 ]]
 --[[ffi.cdef[ [
 	// Windows
@@ -224,56 +226,56 @@ ffi.cdef[[
 -- copied from: https://github.com/hnakamur/luajit-examples/blob/master/socket/cdef/socket.lua
 ffi.cdef[[
 	// these are defined in win_socket.lua, but inside structures
-	static const int IPPROTO_IP				= 0;		// dummy for IP
-	static const int IPPROTO_TCP			= 6;		// tcp
-	static const int IPPROTO_UDP			= 17;		// user datagram protocol
+	static const int IPPROTO_IP	= 0; // dummy for IP
+	static const int IPPROTO_TCP	= 6; // tcp
+	static const int IPPROTO_UDP	= 17;// user datagram protocol
 
-	static const int SOCK_STREAM     = 1;    // stream socket
-	static const int SOCK_DGRAM      = 2;    // datagram socket
+	static const int SOCK_STREAM	= 1; // stream socket
+	static const int SOCK_DGRAM	= 2; // datagram socket
 
-	static const int AF_UNSPEC 		= 0;          // unspecified
-	static const int AF_UNIX 			= 1;          // local to host (pipes, portals)
-	static const int AF_INET 			= 2;          // internetwork: UDP, TCP, etc.
+	static const int AF_UNSPEC	= 0; // unspecified
+	static const int AF_UNIX	= 1; // local to host (pipes, portals)
+	static const int AF_INET	= 2; // internetwork: UDP, TCP, etc.
 
-	static const unsigned long INADDR_ANY             = 0x00000000;
-	static const unsigned long INADDR_BROADCAST       = 0xffffffff;
-	static const int INADDR_LOOPBACK        = 0x7f000001;
-	static const int INADDR_NONE            = 0xffffffff;
+	static const unsigned long INADDR_ANY	=	0x00000000;
+	static const unsigned long INADDR_BROADCAST=	0xffffffff;
+	static const int INADDR_LOOPBACK	=	0x7f000001;
+	static const int INADDR_NONE		=	0xffffffff;
 
 	/* options for socket level */
 	static const int SOL_SOCKET 	= 0xffff;
 
 	/* Option flags per-socket. */
-	static const int SO_DEBUG        = 0x0001;          /* turn on debugging info recording */
-	static const int SO_ACCEPTCONN   = 0x0002;          /* socket has had listen() */
-	static const int SO_REUSEADDR    = 0x0004;          /* allow local address reuse */
-	static const int SO_KEEPALIVE    = 0x0008;          /* keep connections alive */
-	static const int SO_DONTROUTE    = 0x0010;          /* just use interface addresses */
-	static const int SO_BROADCAST    = 0x0020;          /* permit sending of broadcast msgs */
-	static const int SO_USELOOPBACK  = 0x0040;          /* bypass hardware when possible */
-	static const int SO_LINGER       = 0x0080;          /* linger on close if data present */
-	static const int SO_OOBINLINE    = 0x0100;          /* leave received OOB data in line */
-	static const int SO_DONTLINGER   			= (int)(~SO_LINGER);
-	static const int SO_EXCLUSIVEADDRUSE 	= ((int)(~SO_REUSEADDR)); /* disallow local address reuse */
+	static const int SO_DEBUG	= 0x0001; /* turn on debugging info recording */
+	static const int SO_ACCEPTCONN	= 0x0002; /* socket has had listen() */
+	static const int SO_REUSEADDR	= 0x0004; /* allow local address reuse */
+	static const int SO_KEEPALIVE	= 0x0008; /* keep connections alive */
+	static const int SO_DONTROUTE	= 0x0010; /* just use interface addresses */
+	static const int SO_BROADCAST	= 0x0020; /* permit sending of broadcast msgs */
+	static const int SO_USELOOPBACK = 0x0040; /* bypass hardware when possible */
+	static const int SO_LINGER	= 0x0080; /* linger on close if data present */
+	static const int SO_OOBINLINE	= 0x0100; /* leave received OOB data in line */
+	static const int SO_DONTLINGER	= (int)(~SO_LINGER);
+	static const int SO_EXCLUSIVEADDRUSE = ((int)(~SO_REUSEADDR)); /* disallow local address reuse */
 
 	// Additional options.
-	static const int SO_SNDBUF     =  0x1001;         // send buffer size
-	static const int SO_RCVBUF     =  0x1002;         // receive buffer size
-	static const int SO_SNDLOWAT   =  0x1003;         // send low-water mark
-	static const int SO_RCVLOWAT   =  0x1004;         // receive low-water mark
-	static const int SO_SNDTIMEO   =  0x1005;         // send timeout
-	static const int SO_RCVTIMEO   =  0x1006;         // receive timeout
-	static const int SO_ERROR      =  0x1007;         // get error status and clear
-	static const int SO_TYPE       =  0x1008;         // get socket type
-	// defined in win_socket.lua: static const int SO_CONNECT_TIME = 0x700C;				// Connection Time
+	static const int SO_SNDBUF	= 0x1001; // send buffer size
+	static const int SO_RCVBUF	= 0x1002; // receive buffer size
+	static const int SO_SNDLOWAT	= 0x1003; // send low-water mark
+	static const int SO_RCVLOWAT	= 0x1004; // receive low-water mark
+	static const int SO_SNDTIMEO	= 0x1005; // send timeout
+	static const int SO_RCVTIMEO	= 0x1006; // receive timeout
+	static const int SO_ERROR	= 0x1007; // get error status and clear
+	static const int SO_TYPE	= 0x1008; // get socket type
+	// defined in win_socket.lua: static const int SO_CONNECT_TIME = 0x700C; // Connection Time
 
 
-	static const int INET6_ADDRSTRLEN	= 46;
-	static const int INET_ADDRSTRLEN	= 16;
+	static const int INET6_ADDRSTRLEN= 46;
+	static const int INET_ADDRSTRLEN = 16;
 
-	static const int TCP_NODELAY     = 0x0001;
-	static const int TCP_KEEPALIVE 	= 0x0003;
-	static const int TCP_BSDURGENT   = 0x7000;
+	static const int TCP_NODELAY	= 0x0001;
+	static const int TCP_KEEPALIVE	= 0x0003;
+	static const int TCP_BSDURGENT	= 0x7000;
 
 	// Event flag definitions for WSAPoll().
 	static const int POLLRDNORM  = 0x0100;
@@ -294,13 +296,13 @@ ffi.cdef[[
 
 ffi.cdef[[
 	// Constants for getaddrinfo()
-	static const int AI_PASSIVE                  =0x00000001;
+	static const int AI_PASSIVE	= 0x00000001;
 		// get address to use bind(), Socket address will be used in bind() call
-	static const int AI_CANONNAME                =0x00000002;
+	static const int AI_CANONNAME	= 0x00000002;
 		//fill ai_canonname, Return canonical name in first ai_canonname
-	static const int AI_NUMERICHOST              =0x00000004;
+	static const int AI_NUMERICHOST = 0x00000004;
 		// prevent host name resolution, Nodename must be a numeric address string
-	static const int AI_NUMERICSERV              =0x00000008;
+	static const int AI_NUMERICSERV = 0x00000008;
 		// prevent service name resolution, Servicename must be a numeric port number
 
 	static const int AI_ALL		= 0x00000100; /* IPv6 and IPv4-mapped (with AI_V4MAPPED) */
@@ -316,19 +318,19 @@ ffi.cdef[[
 	static const int NI_MAXSERV = 32;
 
 	// Flag values for getnameinfo()
-	static const int NI_NOFQDN			= 0x00000001;
+	static const int NI_NOFQDN	= 0x00000001;
 	static const int NI_NUMERICHOST	= 0x00000002;
-	static const int NI_NAMEREQD		= 0x00000004;
+	static const int NI_NAMEREQD	= 0x00000004;
 	static const int NI_NUMERICSERV	= 0x00000008;
-	static const int NI_DGRAM				= 0x00000010;
+	static const int NI_DGRAM	= 0x00000010;
 	static const int NI_WITHSCOPEID	= 0x00000020;
 
-	static const int 		FORMAT_MESSAGE_FROM_SYSTEM = 0x00001000;
-	static const int 		FORMAT_MESSAGE_IGNORE_INSERTS = 0x00000200;
+	static const int FORMAT_MESSAGE_FROM_SYSTEM = 0x00001000;
+	static const int FORMAT_MESSAGE_IGNORE_INSERTS = 0x00000200;
 
-	static const int SD_RECEIVE = 0; // Shutdown receive operations.
-	static const int SD_SEND 		= 1; // Shutdown send operations.
-	static const int SD_BOTH 		= 2; // Shutdown both send and receive operations.
+	static const int SD_RECEIVE =	0; // Shutdown receive operations.
+	static const int SD_SEND =	1; // Shutdown send operations.
+	static const int SD_BOTH =	2; // Shutdown both send and receive operations.
 
 	typedef uint32_t socklen_t;
 	typedef uint16_t in_port_t;
@@ -343,18 +345,18 @@ ffi.cdef[[
 
 	// methods
 	int getnameinfo(
-		const struct sockaddr  *sa, // _In_ FAR
-		socklen_t salen, // _In_
-		char  *host, // _Out_ FAR
-		DWORD hostlen, // _In_
-		char  *serv, // _Out_ FAR
-		DWORD servlen, // _In_
-		int flags // _In_
+		const struct sockaddr *sa, // _In_ FAR
+		socklen_t salen,// _In_
+		char  *host,	// _Out_ FAR
+		DWORD hostlen,	// _In_
+		char  *serv,	// _Out_ FAR
+		DWORD servlen,	// _In_
+		int flags	// _In_
 	);
 	int getpeername(
-		SOCKET s, //   _In_
-		struct sockaddr *name, //   _Out_
-		int *namelen //   _Inout_
+		SOCKET s,		// _In_
+		struct sockaddr *name,	//_Out_
+		int *namelen		// _Inout_
 	);
 
 	DWORD FormatMessageA(

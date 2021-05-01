@@ -1,6 +1,5 @@
--- [[
-local ffi = require"ffi" --]]
-local bit = require"bit"
+local ffi = require("ffi")
+local bit = require("bit")
 
 local bnot = bit.bnot
 local band = bit.band
@@ -169,12 +168,12 @@ typedef LONG FXPT2DOT30, *LPFXPT2DOT30;
 
 
 
-require "jit-tcp-srv.guiddef"
+require("jit-tcp-srv.guiddef")
 
 
 
 _G.ffi.cdef[[
-// /* @Xer0X
+/* @Xer0X
 typedef union _LARGE_INTEGER {
 	struct {
 		DWORD LowPart;
@@ -392,7 +391,6 @@ typedef struct _LONG_SIZEDARR
     unsigned long clSize;
     unsigned long *pData;
     } 	DWORD_SIZEDARR;
-
 
 ]]
 
